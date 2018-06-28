@@ -1,0 +1,81 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet " />
+    <title>User Page</title>
+    <script>
+        window.onload = function () {
+            var userPageBtn = document.getElementById('userPageBtn'); //Log out
+            //debugger;
+            userPageBtn.onclick = function () {
+                debugger;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/logout');
+                xhr.send();
+                xhr.onload = function () {
+                    debugger;
+                    window.location.href="/?"
+                };
+            };
+        }
+    </script>
+    <style type="text/css">
+
+        html { min-height:100%; }
+        body { padding:0; margin:0; border:0; min-height:100%;
+            font:14px/1.5em Arial, Helvetica, sans-serif; color: #FFFFFF; text-shadow:1px 1px 0 #000000;
+            background: #06040C url('http://bipbap.ru/wp-content/uploads/2017/04/0_7c779_5df17311_orig.jpg') top left  fixed no-repeat;
+            -o-background-size: 100%;
+            -webkit-background-size:100%;
+            -moz-background-size:100%;
+            -khtml-background-size:100%;
+            background-size: 100%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <h1>Hello My User</h1>
+
+    <div style="position: absolute; top: 0%; right: 0;">
+        <button value="Log out" id="userPageBtn">Log out</button>
+    </div>
+
+    <script>
+        function loadfile () {
+            var myIframe = document.createElement("iframe");
+            myIframe.id="myIframe";
+            myIframe.src="javascript:''";
+            myIframe.debug = true;
+            myIframe.sandbox="allow-scripts allow-forms allow-pointer-lock allow-popups allow-modals allow-top-navigation allow-same-origin";
+            myIframe.style="width:500px; height:500px";
+            document.getElementById('parentMyIframe').appendChild(myIframe);
+            document.getElementById('myIframe').src = '/user/play';
+
+             /*var xmlhttp = new XMLHttpRequest();
+             xmlhttp.open('GET','/user/play');
+
+             xmlhttp.send();
+             xmlhttp.onload = function () {
+                 this.responseText;
+                 var e = document.createElement("script");
+                 //e.type="text/javascript";
+                 //e.async = 'async';
+                 //e.innerHTML = '<p>hi!</p>'//this.responseText;
+                 document.getElementById('responsePlay').innerHTML = this.responseText; //.appendChild(e);
+
+                 debugger;
+                 //alert(this.responseText);
+             };*/
+        }
+    </script>
+
+    <button value="Play" onclick="loadfile()" id="playBtn">Play</button>
+    <div id="parentMyIframe"></div>
+    <!--<iframe id="myIframe" src="javascript:''" sandbox="allow-scripts allow-forms allow-pointer-lock allow-popups allow-modals allow-top-navigation allow-same-origin" style="width:800px; height:600px"></iframe>
+-->
+
+</body>
+</html>

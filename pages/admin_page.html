@@ -1,0 +1,43 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Admin Page</title>
+    <script>
+        window.onload = function () {
+            var userPageBtn = document.getElementById('adminPageBtn'); //Log out
+            //debugger;
+            userPageBtn.onclick = function () {
+                //debugger;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/logout');
+                xhr.send();
+                xhr.onload = function () {
+                    window.location.href="/?"
+                };
+            };
+        }
+    </script>
+    <style type="text/css">
+
+        html { min-height:100%; }
+        body { padding:0; margin:0; border:0; min-height:100%;
+            font:14px/1.5em Arial, Helvetica, sans-serif; color: #FFFFFF; text-shadow:1px 1px 0 #000000;
+            background: #06040C url('http://localhost:8080/upload') top left  fixed no-repeat;
+            -o-background-size: 100%;
+            -webkit-background-size:100%;
+            -moz-background-size:100%;
+            -khtml-background-size:100%;
+            background-size: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Hello Admin Grigory</h1>
+    <div style="position: absolute; top: 0%; right: 0;">
+        <button value="Log out" id="adminPageBtn">Log out</button>
+    </div>
+</body>
+</html>
+
