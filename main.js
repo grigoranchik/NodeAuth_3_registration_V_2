@@ -1,3 +1,4 @@
+var fs = require('fs');
 var express = require('express');
 var app = express();
 var cons = require('consolidate');
@@ -26,6 +27,7 @@ var store = sessionHandler.createStore();
 
 //регистрируем промежутчный обработчик, чтобы парсить кукисы
 app.use(cookieParser());
+
 //создание сесии
 app.use(session({
     store: store,
@@ -49,7 +51,7 @@ app.get('/', function (req, res) {
 
 app.get('/upload', function(req, res){
     // Render page with upload form
-    res.sendFile('C:/Users/grigory/Desktop/work/NodeAuth_3(registration)/src/admin_fone.jpg');
+    res.sendFile('C:/Users/grigory/Desktop/work/NodeAuth_3_registration/src/admin_fone.jpg');
     //res.render('admin_fone');
 });
 
@@ -107,6 +109,7 @@ app.post('/registration', function (req, res) {
 });
 
 app.get('/logout', function (req, res) {
+
     delete req.session.authenticated;
     //req.session.username = '';
     console.log('logger out');
@@ -125,6 +128,58 @@ app.get('/admin', function (req, res) {
     }
 });
 
+app.post('/send_path', function (req, res) {
+    function objectSend(nameOfFile, characteristic) {
+        this.nameOfFile = nameOfFile;
+        this.characteristic = characteristic;
+    };
+    // var objectSend = new objectSEnd((massOfFiles, which_of_tables);
+    var massOfTypeFiles=[];
+
+    fs.readdir(req.body.newPath, function(err, items) {
+        var strPath = '';
+        if(req.body.newPath == 'C://'){
+            strPath = req.body.newPath;
+        } else{
+            strPath = req.body.newPath +'//';
+        }
+        //console.log('strPath=', strPath,'items[0]=', items[0]);
+        if (items != undefined){
+
+            var i =0;
+            var recFunc = function () {
+                if(i<items.length){
+                    fs.stat(strPath + items[i], function(err, stats) {
+                        if(stats == undefined){
+                            massOfTypeFiles[i] = new objectSend(items[i], 'undefined');
+                        } else{
+                            if(stats.isFile() == true){
+                                massOfTypeFiles[i] = new objectSend(items[i], 'file');
+                            } else{
+                                massOfTypeFiles[i] = new objectSend(items[i], 'folder');
+                            }
+
+                        }
+                        i++;
+                        recFunc();
+                    });
+                } else{
+                    res.send({newPath: items, massOfTypeFiles: massOfTypeFiles});
+                    return 0;
+                }
+
+            }
+            recFunc();
+            //massSend.join('/n');
+
+        } else {
+            var it = [];    //если папка пустая оправляем пустой массив
+            res.send(it);
+        }
+    });
+
+});
+
 app.get('/user', function (req, res) {
     //страница доступна только для залогиненного пользователя
     //console.log("req.session.username: " + req.session.username);
@@ -139,13 +194,7 @@ app.get('/user', function (req, res) {
 app.get('/user/play', function (req, res) {
     res.render(path.join('piatnashki'));
     console.log(req.body);
-    //страница доступна только для залогиненного пользователя
-    /*if (req.session.username.length > 0) {
-        console.log(req.session.username + ' requested user page');
-        res.render(path.join('user_page'));
-    } else {
-        res.status(403).send('Access Denied!');
-    };*/
+
 });
 
 app.get('/guest', function (req, res) {
