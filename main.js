@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
+var adminRouter = require('./routes/admin');
+var usersRouter = require('./routes/users');
 
 app.use(bodyParser.json());
 
@@ -35,9 +37,6 @@ app.use(session({
     saveUninitialized: true,
     secret: 'supersecret'
 }));
-
-/*app.set('views', path.join(__dirname, 'pages'));
-app.set('view engine', 'html');*/
 
 app.engine('html', cons.swig)
 app.set('views', path.join(__dirname, 'pages'));
@@ -117,7 +116,10 @@ app.get('/logout', function (req, res) {
 });
 
 //ограничение доступа к контенту на основе авторизации
-app.get('/admin', function (req, res) {
+app.use('/admin', adminRouter);
+app.use('/users', usersRouter);
+
+/*app.get('/admin', function (req, res) {
     //страница доступна только для админа
     if (req.session.username == 'admin') {
         console.log(req.session.username + ' requested admin page');
@@ -195,7 +197,7 @@ app.get('/user/play', function (req, res) {
     res.render(path.join('piatnashki'));
     console.log(req.body);
 
-});
+});*/
 
 app.get('/guest', function (req, res) {
     //страница для гостей(без ограничения доступа)

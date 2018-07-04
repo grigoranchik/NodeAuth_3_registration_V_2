@@ -22,6 +22,6 @@ module.exports = {
                 idleTimeoutMillis: 30000
             }
         }
-        //return config;
+        //return new MSSQLStore(config);
     }
 }
