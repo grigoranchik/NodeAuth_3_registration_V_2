@@ -8,12 +8,14 @@ router.use(function timeLog(req, res, next) {
     next();
 });
 
-router.get('/mango', function(req, res, next) {
-  res.send('respond with a resource');
-});
 router.get('/fractale', function(req, res, next) {
     res.send('fractale');
 });
+
+router.get('/mango', function(req, res, next) {
+  res.send('respond with a resource');
+});
+
 
 
 module.exports = router;

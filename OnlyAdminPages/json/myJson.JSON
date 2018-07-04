@@ -1,0 +1,47 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "_storage_options": {
+                    "color": "Brown",
+                    "iconClass": "Drop"
+                },
+                "name": "Beacon",
+                "description": "Date: Jun-30-2018 16:52:46\n Location: Kapuzinergässli, 6300 Zug, Switzerland"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.51513,
+                    47.16449
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "_storage_options": {
+                    "color": "Brown",
+                    "iconClass": "Drop"
+                },
+                "name": "Beacon",
+                "description": "Date: Jun-30-2018 16:52:45\n Location: Kirchenstrasse 11, 6300 Zug, Switzerland"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.51452,
+                    47.1647
+                ]
+            }
+        }
+    ],
+    "_storage": {
+        "displayOnLoad": true,
+        "browsable": true,
+        "name": "Beacon",
+        "id": "1001"
+    }
+}

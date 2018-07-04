@@ -11,7 +11,7 @@ var usersRouter = require('./routes/users');
 
 app.use(bodyParser.json());
 
-var port = 8080;
+var port = 5000;
 
 //зарегистрированные пользователи, которые могут быть авторизированны
 var users = [
@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
 
 app.get('/upload', function(req, res){
     // Render page with upload form
-    res.sendFile('C:/Users/grigory/Desktop/work/NodeAuth_3_registration/src/image-0-02-04-af051f1cd15cfd21ce4b9ea040f81cc5791c0489f483090e6d83e95efa12419e-V.jpg');
+    res.sendFile('C:/Users/grigory/Desktop/work/NodeAuth_3_registration/src/admin_fone.jpg');
     //res.render('admin_fone');
 });
 

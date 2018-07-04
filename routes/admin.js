@@ -3,12 +3,30 @@ var fs = require('fs');
 var path = require('path');
 var bodyParser = require('body-parser');
 var router = express.Router();
+var jsonParser = bodyParser.json();
 
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
-/* GET home page. */
+router.get('/static/json/myJson.JSON', function (req, res) {
+    fs.readFile("OnlyAdminPages/json/myJson.JSON", "utf8",
+        function(error,data){
+            if(error) throw error; // если возникла ошибка
+            var myObj = data;
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(myObj);
+        });
+});
 
 router.use('/static', express.static('OnlyAdminPages'));
+
+router.post('/static/regress_json', jsonParser,  function (req, res) {
+
+    fs.writeFile("OnlyAdminPages/json/myJson.JSON", req.body.myJson, function(error){
+        if(error) throw error; // если возникла ошибка
+        res.end('ok!');
+    });
+});
 
 router.get('/', function (req, res) {
     //страница доступна только для админа
